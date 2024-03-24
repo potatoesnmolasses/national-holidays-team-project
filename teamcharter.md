@@ -13,6 +13,8 @@ This API is intended to tackle that exact issue.  It can be used to view, update
 
 ### Team Resume
 * Ian DeLoach: Note Taker
-* Jordan Gruel: Issues created
-* Anna Kessler: Set team meetings
+
+* Jordan Gruel: Strong writer, Issues created
+
+* Anna Kessler: Sets team meetings, Organized, Likes competition, Handles criticism 
 

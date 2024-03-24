@@ -12,7 +12,7 @@ This API is intended to tackle that exact issue.  It can be used to view, update
 3. Communicate any issues outside meeting times on Slack
 
 ### Team Resume
-* Ian DeLoach:
+* Ian DeLoach: Note Taker
 * Jordan Gruel: Issues created
 * Anna Kessler: Set team meetings
 

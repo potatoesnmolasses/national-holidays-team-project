@@ -14,7 +14,7 @@ This API is intended to tackle that exact issue.  It can be used to view, update
 ### Team Resume
 * Ian DeLoach: Note Taker
 
-* Jordan Gruel: Strong writer, Issues created
+* Jordan Gruel: Strong writer, Issues created, Can draw, Speaks Japanese
 
 * Anna Kessler: Sets team meetings, Organized, Likes competition, Handles criticism 
 

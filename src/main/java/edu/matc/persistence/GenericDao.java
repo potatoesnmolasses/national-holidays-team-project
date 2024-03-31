@@ -1,6 +1,5 @@
 package edu.matc.persistence;
 
-import edu.matc.entity.User;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +13,7 @@ import java.util.List;
 public class GenericDao<T> {
     private Class<T> type;
     private final Logger logger = LogManager.getLogger(this.getClass());
-//TODO: finish implementing generics and testing
+//TODO: unit testing
     /**
      * instantiates a new Generic dao
      * @param type the entity type (e.g. user)
@@ -53,21 +52,6 @@ public class GenericDao<T> {
         session.merge(entity);
         transaction.commit();
         session.close();
-    }
-
-    /**
-     * insert a new entity
-     * @param entity entity to be inserted
-     */
-    public int insert(User user) {
-        int id = 0;
-        Session session = getSession();
-        Transaction transaction = session.beginTransaction();
-        session.persist(user);
-        transaction.commit();
-        id = user.getId();
-        session.close();
-        return id;
     }
 
     public int insertEntity(T entity) {

@@ -6,6 +6,11 @@ import org.hibernate.annotations.GenericGenerator;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * creates a Holiday for RESTful webservice
+ * author @jgruel
+ * obtained from https://www.timeanddate.com/holidays/fun/ using jsoup web scraper
+ */
 @Data
 @Entity
 @Table(name = "holiday")
@@ -33,7 +38,8 @@ public class Holiday {
     }
 
     /**
-     * no arg constructor
+     * no arg constructor for Holiday objects
+     *
      */
     public Holiday() {
 

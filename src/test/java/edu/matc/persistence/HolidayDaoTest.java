@@ -56,4 +56,16 @@ class HolidayDaoTest {
         assertNotNull(holidayList);
         assertEquals(432, holidayList.size());
     }
+
+    @Test
+    void getByPropertyLike() {
+        List<Holiday> holidays = holidayDao.getByPropertyLike("name", "Polar");
+        assertEquals(2, holidays.size());
+    }
+
+    @Test
+    void getByPropertyEqual() {
+        List<Holiday> holidays = holidayDao.getByPropertyEqual("name", "Polar Bear Plunge Day");
+        assertEquals(1, holidays.size());
+    }
 }

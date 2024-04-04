@@ -17,12 +17,11 @@ public class ResponseHolidayAll {
 
     // The Java method will process HTTP GET requests
     @GET
-    // The Java method will produce content identified by the MIME Media type "text/plain"
     @Produces("text/json")
     public Response getMessage() {
         GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
         List<Holiday> holidays = holidayDao.getAll();
-        logger.debug(holidays);
+        logger.debug("The list of holidays:" + holidays);
         StringBuilder text = new StringBuilder();
 
         for (Holiday holiday : holidays) {

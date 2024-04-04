@@ -1,6 +1,7 @@
 package edu.matc.persistence;
 
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,7 @@ import java.util.List;
 public class GenericDao<T> {
     private Class<T> type;
     private final Logger logger = LogManager.getLogger(this.getClass());
-//TODO: unit testing
+
     /**
      * instantiates a new Generic dao
      * @param type the entity type (e.g. user)
@@ -93,5 +94,43 @@ public class GenericDao<T> {
         session.close();
 
         return list;
+    }
+
+    /**
+     * Finds entities by one of its properties.
+     * @param propertyName the property name.
+     * @param value the value by which to find.
+     * @return the list of all entities found matching the criteria
+     */
+    public List<T> findByPropertyEqual(String propertyName, Object value) {
+        Session session = getSession();
+        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        query.select(root).where(builder.equal(root.get(propertyName),value));
+        List<T> items = session.createSelectionQuery( query ).getResultList();
+        session.close();
+        return items;
+    }
+
+    /**
+     * Get user by property (like)
+     * sample usage: getByPropertyLike("lastname", "C")
+     */
+    public List<T> getByPropertyLike(String propertyName, String value) {
+        Session session = getSession();
+
+        logger.debug("Searching for holiday with {} = {}",  propertyName, value);
+
+        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<String> propertyPath = root.get(propertyName);
+
+        query.where(builder.like(propertyPath, "%" + value + "%"));
+
+        List<T> items = session.createQuery( query ).getResultList();
+        session.close();
+        return items;
     }
 }

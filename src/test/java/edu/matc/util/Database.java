@@ -20,37 +20,19 @@ import java.util.Properties;
  * @author Alex M - Fall 2019 - added multi-line sql capability
  */
 
-public class Database {
+public class Database implements PropertiesLoader {
 
     // create an object of the class Database
     private static Database instance = new Database();
 
-    // create the logger
-    private final Logger logger = LogManager.getLogger(this.getClass());
-
     private Properties properties;
     private Connection connection;
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     /** private constructor prevents instantiating this class anywhere else
      **/
     private Database() {
-        loadProperties();
-
-    }
-
-    /** load the properties file containing the driver, connection url, userid and pwd.
-     * TODO this would be improved by using properties loader interface provided in adv java
-     */
-    private void loadProperties() {
-        properties = new Properties();
-        try {
-            properties.load (this.getClass().getResourceAsStream("/database.properties"));
-        } catch (IOException ioe) {
-            logger.error("Database.loadProperties()...Cannot load the properties file", ioe);
-        } catch (Exception e) {
-            logger.error("Database.loadProperties()...", e);
-        }
-
+        this.properties = loadProperties("/database.properties");
     }
 
     /** get the only Database object available

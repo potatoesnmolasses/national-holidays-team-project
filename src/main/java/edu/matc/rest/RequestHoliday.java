@@ -14,7 +14,8 @@ public class RequestHoliday extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
-        h.add(ResponseHoliday.class );
+        h.add(ResponseHolidayAll.class);
+        h.add(ResponseHolidayById.class);
         return h;
     }
 }

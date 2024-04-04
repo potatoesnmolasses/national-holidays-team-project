@@ -11,14 +11,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/holidays")
-public class ResponseHoliday {
+@Path("/allHolidays")
+public class ResponseHolidayAll {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     // The Java method will process HTTP GET requests
     @GET
     // The Java method will produce content identified by the MIME Media type "text/plain"
-    @Produces("text/plain")
+    @Produces("text/json")
     public Response getMessage() {
         GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
         List<Holiday> holidays = holidayDao.getAll();

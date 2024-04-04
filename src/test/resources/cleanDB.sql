@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: holiday_wizard
+-- Host: 127.0.0.1    Database: holiday_wizard_test
 -- ------------------------------------------------------
 -- Server version	8.0.36-0ubuntu0.22.04.1
 

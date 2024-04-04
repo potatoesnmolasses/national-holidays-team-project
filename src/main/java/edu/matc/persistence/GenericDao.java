@@ -13,7 +13,7 @@ import java.util.List;
 public class GenericDao<T> {
     private Class<T> type;
     private final Logger logger = LogManager.getLogger(this.getClass());
-//TODO: unit testing
+
     /**
      * instantiates a new Generic dao
      * @param type the entity type (e.g. user)
@@ -71,7 +71,7 @@ public class GenericDao<T> {
     public void delete(T entity) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
-        session.delete(entity);
+        session.remove(entity);
         transaction.commit();
         session.close();
     }

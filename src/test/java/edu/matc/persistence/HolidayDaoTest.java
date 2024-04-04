@@ -6,6 +6,7 @@ import edu.matc.util.Database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,18 +24,30 @@ class HolidayDaoTest {
 
     @Test
     void getById() {
+        Holiday retrievedHoliday = holidayDao.getById(1);
+        assertNotNull(retrievedHoliday);
+        assertEquals("Polar Bear Plunge Day", retrievedHoliday.getName());
     }
 
     @Test
     void update() {
+        Holiday holidayToUpdate = holidayDao.getById(1);
+        holidayToUpdate.setName("New Holiday");
+        assertEquals("New Holiday", holidayToUpdate.getName());
     }
 
     @Test
     void delete() {
+        holidayDao.delete(holidayDao.getById(1));
+        assertNull(holidayDao.getById(1));
     }
 
     @Test
     void insert() {
+        LocalDate holidayDate = LocalDate.of(1970, 4, 15);
+        Holiday holidayToInsert = new Holiday(holidayDate,"Your mom");
+        int insertedUserId = holidayDao.insertEntity(holidayToInsert);
+        assertNotEquals(0, holidayToInsert);
     }
 
     @Test

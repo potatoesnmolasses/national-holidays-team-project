@@ -16,6 +16,8 @@ public class RequestHoliday extends Application {
         HashSet h = new HashSet<Class<?>>();
         h.add(ResponseHolidayAll.class);
         h.add(ResponseHolidayById.class);
+        h.add(ResponseHolidayByName.class);
+        h.add(ResponseHolidayByDate.class);
         return h;
     }
 }

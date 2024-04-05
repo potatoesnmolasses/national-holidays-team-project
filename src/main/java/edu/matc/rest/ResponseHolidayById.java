@@ -1,5 +1,6 @@
 package edu.matc.rest;
 
+import com.google.gson.Gson;
 import edu.matc.entity.Holiday;
 import edu.matc.persistence.GenericDao;
 
@@ -15,7 +16,8 @@ public class ResponseHolidayById {
         GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
         Holiday holiday = holidayDao.getById(id);
         if (holiday != null) {
-            return Response.status(Response.Status.OK).entity(holiday.toString()).build();
+            String json = new Gson().toJson(holiday);
+            return Response.status(Response.Status.OK).entity(json).build();
         }
         String errorMessage = "Unable to find results for id:" + id;
         return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();

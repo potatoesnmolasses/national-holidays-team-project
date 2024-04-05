@@ -1,5 +1,6 @@
 package edu.matc.rest;
 
+import com.google.gson.Gson;
 import edu.matc.entity.Holiday;
 import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
@@ -22,12 +23,11 @@ public class ResponseHolidayAll {
         GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
         List<Holiday> holidays = holidayDao.getAll();
         logger.debug("The list of holidays:" + holidays);
-        StringBuilder text = new StringBuilder();
 
-        for (Holiday holiday : holidays) {
-            text.append(holiday.toString());
-        }
+        // Convert the list of Holiday objects to JSON using Gson
+        Gson gson = new Gson();
+        String json = gson.toJson(holidays);
 
-        return Response.status(200).entity(text.toString()).build();
+        return Response.status(200).entity(json).build();
     }
 }

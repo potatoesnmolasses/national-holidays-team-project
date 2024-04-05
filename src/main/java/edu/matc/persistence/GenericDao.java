@@ -2,6 +2,7 @@ package edu.matc.persistence;
 
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class GenericDao<T> {
@@ -130,6 +132,20 @@ public class GenericDao<T> {
         query.where(builder.like(propertyPath, "%" + value + "%"));
 
         List<T> items = session.createQuery( query ).getResultList();
+        session.close();
+        return items;
+    }
+    //TODO units test this method
+    public List<T> findByMonthAndDay(int month, int day) {
+        Session session = getSession();
+        HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<LocalDate> dateExpression = root.get("date");
+        Predicate monthPredicate = builder.equal(builder.function("month", Integer.class, dateExpression), month);
+        Predicate dayPredicate = builder.equal(builder.function("day", Integer.class, dateExpression), day);
+        query.select(root).where(builder.and(monthPredicate, dayPredicate));
+        List<T> items = session.createQuery(query).getResultList();
         session.close();
         return items;
     }

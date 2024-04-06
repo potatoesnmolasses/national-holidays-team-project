@@ -2,10 +2,7 @@ package edu.matc.persistence;
 
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
-<<<<<<< HEAD
-=======
 import jakarta.persistence.criteria.Predicate;
->>>>>>> main
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +19,6 @@ public class GenericDao<T> {
 
     /**
      * instantiates a new Generic dao
-     *
      * @param type the entity type (e.g. user)
      */
     public GenericDao(Class<T> type) {
@@ -31,22 +27,19 @@ public class GenericDao<T> {
 
     /**
      * Returns an open session from the SessionFactory
-     *
      * @return session
      */
-    private Session getSession() {
-        return SessionFactoryProvider.getSessionFactory().openSession();
+    private Session getSession() {return SessionFactoryProvider.getSessionFactory().openSession();
     }
 
     /**
      * Get entity by id
-     *
      * @param id the id to search by
      * @return an entity
      */
-    public <T> T getById(int id) {
+    public <T>T getById(int id) {
         Session session = getSession();
-        T entity = (T) session.get(type, id);
+        T entity = (T)session.get(type, id);
         session.close();
         logger.debug("The entity found by id: " + entity);
         return entity;
@@ -54,8 +47,7 @@ public class GenericDao<T> {
 
     /**
      * update entity
-     *
-     * @param entity entity to be updated
+     * @param entity  entity to be updated
      */
     public void update(T entity) {
         Session session = getSession();
@@ -69,7 +61,7 @@ public class GenericDao<T> {
         int id = 0;
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
-        id = (Integer) session.save(entity);
+        id = (Integer)session.save(entity);
         transaction.commit();
         session.close();
         return id;
@@ -77,19 +69,17 @@ public class GenericDao<T> {
 
     /**
      * Delete an entity
-     *
      * @param entity entity to be deleted
      */
     public void delete(T entity) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
-        session.remove(entity);
+        session.delete(entity);
         transaction.commit();
         session.close();
     }
 
-    /**
-     * Return a list of all entities
+    /** Return a list of all entities
      *
      * @return all the entities
      */
@@ -100,7 +90,7 @@ public class GenericDao<T> {
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);
-        List<T> list = session.createSelectionQuery(query).getResultList();
+        List<T> list = session.createSelectionQuery( query ).getResultList();
 
         logger.debug("The list: " + list);
         session.close();
@@ -110,31 +100,17 @@ public class GenericDao<T> {
 
     /**
      * Finds entities by one of its properties.
-<<<<<<< HEAD
-     *
-     * @param propertyName the property name.
-     * @param value        the value by which to find.
-     * @return the list of all entities found matching the criteria
-     */
-    public List<T> getByPropertyEqual(String propertyName, Object value) {
-=======
      * @param propertyName the property name.
      * @param value the value by which to find.
      * @return the list of all entities found matching the criteria
      */
-    public List<T> findByPropertyEqual(String propertyName, Object value) {
->>>>>>> main
+    public List<T> getByPropertyEqual(String propertyName, Object value) {
         Session session = getSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
         Root<T> root = query.from(type);
-<<<<<<< HEAD
-        query.select(root).where(builder.equal(root.get(propertyName), value));
-        List<T> items = session.createSelectionQuery(query).getResultList();
-=======
         query.select(root).where(builder.equal(root.get(propertyName),value));
         List<T> items = session.createSelectionQuery( query ).getResultList();
->>>>>>> main
         session.close();
         return items;
     }
@@ -146,11 +122,7 @@ public class GenericDao<T> {
     public List<T> getByPropertyLike(String propertyName, String value) {
         Session session = getSession();
 
-<<<<<<< HEAD
-        logger.debug("Searching for holiday with {} = {}", propertyName, value);
-=======
         logger.debug("Searching for holiday with {} = {}",  propertyName, value);
->>>>>>> main
 
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(type);
@@ -159,8 +131,6 @@ public class GenericDao<T> {
 
         query.where(builder.like(propertyPath, "%" + value + "%"));
 
-<<<<<<< HEAD
-=======
         List<T> items = session.createQuery( query ).getResultList();
         session.close();
         return items;
@@ -175,7 +145,6 @@ public class GenericDao<T> {
         Predicate monthPredicate = builder.equal(builder.function("month", Integer.class, dateExpression), month);
         Predicate dayPredicate = builder.equal(builder.function("day", Integer.class, dateExpression), day);
         query.select(root).where(builder.and(monthPredicate, dayPredicate));
->>>>>>> main
         List<T> items = session.createQuery(query).getResultList();
         session.close();
         return items;

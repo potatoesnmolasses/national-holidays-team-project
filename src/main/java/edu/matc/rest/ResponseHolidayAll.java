@@ -1,5 +1,6 @@
 package edu.matc.rest;
 
+import com.google.gson.Gson;
 import edu.matc.entity.Holiday;
 import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
@@ -11,24 +12,22 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/holidays")
-public class ResponseHoliday {
+@Path("/allHolidays")
+public class ResponseHolidayAll {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     // The Java method will process HTTP GET requests
     @GET
-    // The Java method will produce content identified by the MIME Media type "text/plain"
-    @Produces("text/plain")
+    @Produces("text/json")
     public Response getMessage() {
         GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
         List<Holiday> holidays = holidayDao.getAll();
-        logger.debug(holidays);
-        StringBuilder text = new StringBuilder();
+        logger.debug("The list of holidays:" + holidays);
 
-        for (Holiday holiday : holidays) {
-            text.append(holiday.toString());
-        }
+        // Convert the list of Holiday objects to JSON using Gson
+        Gson gson = new Gson();
+        String json = gson.toJson(holidays);
 
-        return Response.status(200).entity(text.toString()).build();
+        return Response.status(200).entity(json).build();
     }
 }

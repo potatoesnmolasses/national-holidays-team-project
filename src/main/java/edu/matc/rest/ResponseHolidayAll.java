@@ -30,4 +30,5 @@ public class ResponseHolidayAll {
 
         return Response.status(200).entity(json).build();
     }
+
 }

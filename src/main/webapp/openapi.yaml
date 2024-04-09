@@ -21,23 +21,8 @@ paths:
             application/json:
               schema: 
                 type: array
-                items: 
-                  type: object
-                  required:
-                    - id
-                    - name
-                    - date
-                  properties:
-                    id:
-                      type: integer
-                    date:
-                      type: object
-                      properties:
-                        year: integer
-                        month: integer
-                        day: integer
-                    name:
-                      type: string
+                items:
+                  $ref: '#/components/schemas/Holiday'
         '400':
           description: Invalid request
           content:
@@ -59,22 +44,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - id
-                  - name
-                  - date
-                properties:
-                  id:
-                    type: integer
-                  date:
-                    type: object
-                    properties:
-                      year: integer
-                      month: integer
-                      day: integer
-                  name:
-                    type: string
+                $ref: '#/components/schemas/Holiday'
 
         '400':
           description: Invalid request
@@ -97,22 +67,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - id
-                  - name
-                  - date
-                properties:
-                  id:
-                    type: integer
-                  date:
-                    type: object
-                    properties:
-                      year: integer
-                      month: integer
-                      day: integer
-                  name:
-                    type: string
+                $ref: '#/components/schemas/Holiday'
 
         '400':
           description: Invalid request
@@ -135,22 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - id
-                  - name
-                  - date
-                properties:
-                  id:
-                    type: integer
-                  date:
-                    type: object
-                    properties:
-                      year: integer
-                      month: integer
-                      day: integer
-                  name:
-                    type: string
+                $ref: '#/components/schemas/Holiday'
 
         '400':
           description: Invalid request
@@ -161,3 +101,24 @@ paths:
                 properties:
                   message:
                     type: string
+
+components:
+  schemas:
+    Holiday:
+      required:
+        - id
+        - name
+        - date
+      properties:
+        id:
+          type: integer
+          example: 1
+        date:
+          type: object
+          properties:
+            year: integer
+            month: integer
+            day: integer
+        name:
+          type: string
+          example: Bring your daughter to work day

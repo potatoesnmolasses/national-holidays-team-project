@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 //Defines the base URI for all resource URIs.
-@ApplicationPath("/v1")
+@ApplicationPath("/")
 //The java class declares root resource and provider classes
 public class RequestHoliday extends Application {
 

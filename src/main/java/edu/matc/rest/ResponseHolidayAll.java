@@ -12,7 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-
 @Path("/allHolidays")
 public class ResponseHolidayAll {
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -31,5 +30,4 @@ public class ResponseHolidayAll {
 
         return Response.status(200).entity(json).build();
     }
-
 }

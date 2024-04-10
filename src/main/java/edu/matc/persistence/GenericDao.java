@@ -13,12 +13,18 @@ import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * The type Generic dao.
+ *
+ * @param <T> the type parameter
+ */
 public class GenericDao<T> {
     private Class<T> type;
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     /**
      * instantiates a new Generic dao
+     *
      * @param type the entity type (e.g. user)
      */
     public GenericDao(Class<T> type) {
@@ -34,7 +40,9 @@ public class GenericDao<T> {
 
     /**
      * Get entity by id
-     * @param id the id to search by
+     *
+     * @param <T> the type parameter
+     * @param id  the id to search by
      * @return an entity
      */
     public <T>T getById(int id) {
@@ -47,7 +55,8 @@ public class GenericDao<T> {
 
     /**
      * update entity
-     * @param entity  entity to be updated
+     *
+     * @param entity entity to be updated
      */
     public void update(T entity) {
         Session session = getSession();
@@ -57,6 +66,12 @@ public class GenericDao<T> {
         session.close();
     }
 
+    /**
+     * Insert entity int.
+     *
+     * @param entity the entity
+     * @return the int
+     */
     public int insertEntity(T entity) {
         int id = 0;
         Session session = getSession();
@@ -69,6 +84,7 @@ public class GenericDao<T> {
 
     /**
      * Delete an entity
+     *
      * @param entity entity to be deleted
      */
     public void delete(T entity) {
@@ -79,7 +95,8 @@ public class GenericDao<T> {
         session.close();
     }
 
-    /** Return a list of all entities
+    /**
+     * Return a list of all entities
      *
      * @return all the entities
      */
@@ -100,8 +117,9 @@ public class GenericDao<T> {
 
     /**
      * Finds entities by one of its properties.
+     *
      * @param propertyName the property name.
-     * @param value the value by which to find.
+     * @param value        the value by which to find.
      * @return the list of all entities found matching the criteria
      */
     public List<T> getByPropertyEqual(String propertyName, Object value) {
@@ -116,8 +134,12 @@ public class GenericDao<T> {
     }
 
     /**
-     * Get user by property (like)
-     * sample usage: getByPropertyLike("lastname", "C")
+     * Get holiday by property (like)
+     * sample usage: getByPropertyLike("name", "C")
+     *
+     * @param propertyName the property name
+     * @param value        the value
+     * @return the by property like
      */
     public List<T> getByPropertyLike(String propertyName, String value) {
         Session session = getSession();
@@ -135,7 +157,14 @@ public class GenericDao<T> {
         session.close();
         return items;
     }
-    //TODO units test this method
+
+    /**
+     * Find by month and day list.
+     *
+     * @param month the month
+     * @param day   the day
+     * @return the list
+     */
     public List<T> findByMonthAndDay(int month, int day) {
         Session session = getSession();
         HibernateCriteriaBuilder builder = session.getCriteriaBuilder();

@@ -5,23 +5,29 @@ import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 
 @Path("/add")
-public class AddHoliday {
+public class ResponseAddHoliday {
     private final Logger logger = LogManager.getLogger(this.getClass());
     @POST
+    @Path("/{month}/{day}/{name}")
     public Response addHoliday(
-            @FormParam("date") String date,
-            @FormParam("name") String name) {
+            @PathParam("month") String monthString,
+            @PathParam("day") String dayString,
+            @PathParam("name") String name) {
 
         try {
-
-            LocalDate holidayDate = LocalDate.parse(date);
+            // Parse string to int
+            int month = Integer.parseInt(monthString);
+            int day = Integer.parseInt(dayString);
+            // Get current year
+            int currentYear = LocalDate.now().getYear();
+            LocalDate holidayDate = LocalDate.of(currentYear, month, day);
 
             Holiday holiday = new Holiday();
             holiday.setDate(holidayDate);
@@ -32,16 +38,17 @@ public class AddHoliday {
             Holiday insertedHoliday = holidayDao.getById(holiday.getId());
 
             if (insertedHoliday != null) {
-                return Response.status(200)
-                        .entity("Holiday added successfully! Name: " + holiday.getName() + "Date" + holiday.getDate()).build();
+                return Response.status(Response.Status.CREATED)
+                        .entity("Holiday added successfully! Name: " + holiday.getName() + ", Date: " + holiday.getDate())
+                        .build();
             } else {
-                return Response.status(500)
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                         .entity("Failed to add holiday to the database.")
                         .build();
             }
         } catch (Exception e) {
-            logger.error("Holiday was not entered into the database");
-            return Response.status(500)
+            logger.error("Holiday was not entered into the database", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Failed to add holiday.")
                     .build();
         }

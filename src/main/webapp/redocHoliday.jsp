@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,7 @@
     </style>
 </head>
 <body>
+<c:import url="header.jsp"/>
 <redoc spec-url='openapi.yaml'></redoc>
 <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"> </script>
 </body>

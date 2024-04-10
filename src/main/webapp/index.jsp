@@ -2,9 +2,9 @@
 
 <!DOCTYPE html>
 <html>
+    <c:set var = "title" scope = "page" value="Holiday Wizard"/>
     <c:import url="head.jsp"/>
     <body>
     <c:import url="header.jsp"/>
-    <h2>Testing</h2>
     </body>
 </html>

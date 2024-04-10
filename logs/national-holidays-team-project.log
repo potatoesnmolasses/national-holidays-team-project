@@ -2,3 +2,5 @@
 [DEBUG] 2024-04-09 21:44:15.080 [main] GenericDao - The entity found by id: Holiday(id=1, date=Dec 31, name=Polar Bear Plunge Day)
 [DEBUG] 2024-04-09 21:45:37.858 [main] GenericDao - The entity found by id: Holiday(id=1, date=Dec 31, name=Polar Bear Plunge Day)
 [DEBUG] 2024-04-09 21:45:38.114 [main] GenericDao - The entity found by id: Holiday(id=1, date=Dec 30, name=New Holiday)
+[DEBUG] 2024-04-09 21:48:30.383 [main] GenericDao - The entity found by id: Holiday(id=1, date=Dec 31, name=Polar Bear Plunge Day)
+[DEBUG] 2024-04-09 21:48:30.825 [main] GenericDao - The entity found by id: Holiday(id=1, date=Dec 30, name=New Holiday)

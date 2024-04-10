@@ -33,7 +33,9 @@ class HolidayDaoTest {
     void update() {
         Holiday holidayToUpdate = holidayDao.getById(1);
         holidayToUpdate.setName("New Holiday");
-        assertEquals("New Holiday", holidayToUpdate.getName());
+        holidayDao.update(holidayToUpdate);
+        Holiday updatedHoliday = holidayDao.getById(1);
+        assertEquals("New Holiday", updatedHoliday.getName());
     }
 
     @Test

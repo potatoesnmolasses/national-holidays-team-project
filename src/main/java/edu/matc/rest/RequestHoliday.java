@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 //Defines the base URI for all resource URIs.
-@ApplicationPath("/")
+@ApplicationPath("/services")
 //The java class declares root resource and provider classes
 public class RequestHoliday extends Application {
 
@@ -14,10 +14,7 @@ public class RequestHoliday extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
-        h.add(ResponseHolidayAll.class);
-        h.add(ResponseHolidayById.class);
-        h.add(ResponseHolidayByName.class);
-        h.add(ResponseHolidayByDate.class);
+        h.add(ResponseHoliday.class);
         return h;
     }
 }

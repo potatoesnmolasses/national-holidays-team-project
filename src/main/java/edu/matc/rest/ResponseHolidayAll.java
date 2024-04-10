@@ -9,13 +9,9 @@ import org.apache.logging.log4j.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Path("/allHolidays")
 public class ResponseHolidayAll {

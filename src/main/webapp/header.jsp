@@ -4,7 +4,7 @@
         <p>Holiday Wizard</p>
     </div>
 
-    <div id="navigation-list" class="d-flex justify-content-center py-3">
+    <div id="navigation-list" class="d-flex justify-content-center py-3" class="sticky-top">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a class="nav-link" href="index.jsp">Home</a>

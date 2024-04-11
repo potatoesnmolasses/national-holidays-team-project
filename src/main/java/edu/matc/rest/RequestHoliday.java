@@ -18,7 +18,6 @@ public class RequestHoliday extends Application {
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add(ResponseHoliday.class);
-        h.add(ResponseHolidayUpdate.class);
         return h;
     }
 }

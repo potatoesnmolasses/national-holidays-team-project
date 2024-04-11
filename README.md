@@ -9,16 +9,16 @@ This API is intended to tackle that exact issue. It can be used to view, update,
 
 ### Team Members
 
-* [Ian Deloach] (https://github.com/ian-deloach)
-* [Jordan Gruel] (https://github.com/potatoesnmolasses)
-* [Anna Kessler] (https://github.com/redfoxanna)
+* [Ian Deloach](https://github.com/ian-deloach)
+* [Jordan Gruel](https://github.com/potatoesnmolasses)
+* [Anna Kessler](https://github.com/redfoxanna)
 
 ---
 
 ### Project Technologies/Techniques
 
 * API Documentation
-    * [Redockly] (https://redocly.com/)      
+    * [Redockly](https://redocly.com/)      
 * Security/Authentication
     * AWS Cognito
 * Database
@@ -29,7 +29,7 @@ This API is intended to tackle that exact issue. It can be used to view, update,
     * Maven
 * CSS
     * Bootstrap
-    * Inspired by: [The Trivia API] (https://the-trivia-api.com/docs/v2/)
+    * Inspired by: [The Trivia API](https://the-trivia-api.com/docs/v2/)
 * Logging
     * Log4J2
 * Hosting

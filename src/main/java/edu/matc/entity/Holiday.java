@@ -24,7 +24,7 @@ public class Holiday {
     @Column(name = "name")
     private String name;
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd");
 
     /**
      * creates a holiday with date and name
@@ -50,7 +50,8 @@ public class Holiday {
      */
     public String toString() {
 
-        String formattedDate = date.format(formatter);
+        LocalDate correctDate = date.plusDays(1);
+        String formattedDate = correctDate.toString();
 
         return "Holiday(id=" + id + ", date=" + formattedDate + ", name=" + name + ")";
     }

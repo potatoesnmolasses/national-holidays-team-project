@@ -141,4 +141,50 @@ public class ResponseHoliday {
                 .build();
 
     }
+
+    @POST
+    @Path("/add")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response addHoliday(
+            @FormParam("month") int month,
+            @FormParam("day") int day,
+            @FormParam("name") String name) {
+        try {
+            // Check if any fields are empty
+            if (name.isEmpty()) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Holiday name cannot be empty")
+                        .build();
+            }
+
+            // Get the current year
+            int currentYear = LocalDate.now().getYear();
+
+            // Create a LocalDate object for the holiday date
+            LocalDate holidayDate = LocalDate.of(currentYear, month, day);
+
+            Holiday holiday = new Holiday();
+            holiday.setDate(holidayDate);
+            holiday.setName(name);
+
+            GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
+            holidayDao.insertEntity(holiday);
+
+            Holiday insertedHoliday = holidayDao.getById(holiday.getId());
+
+            if (insertedHoliday != null) {
+                return Response.status(Response.Status.CREATED)
+                        .entity("Holiday added successfully! Name: " + holiday.getName() + ", Date: " + holiday.getDate())
+                        .build();
+            } else {
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity("Failed to add holiday to the database.")
+                        .build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Failed to add holiday. Error: " + e.getMessage())
+                    .build();
+        }
+    }
 }

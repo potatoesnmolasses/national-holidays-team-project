@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
     <c:set var = "title" scope = "page" value="All Holidays"/>
-    <c:import url="head.jsp"/>
+    <c:import url="components/head.jsp"/>
+    <link href="css/viewAll.css" rel="stylesheet" type="text/css">
     <body>
-        <c:import url="header.jsp"/>
+        <c:import url="components/header.jsp"/>
     </body>
 </html>

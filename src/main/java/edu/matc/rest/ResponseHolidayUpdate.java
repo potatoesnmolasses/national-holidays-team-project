@@ -1,36 +1,77 @@
 package edu.matc.rest;
 
-import com.google.gson.Gson;
 import edu.matc.entity.Holiday;
 import edu.matc.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
-@Path("/holidayUpdate")
+@Path("/holiday")
 public class ResponseHolidayUpdate {
+    private final Logger logger = LogManager.getLogger(this.getClass());
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("MMM d");
+    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d");
+
     @POST
-    @Produces("application/json")
-    public Response updateHoliday(@QueryParam("holId") int id, @QueryParam("holName") String name, @QueryParam("holDate") String date) {
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public Response updateHoliday(
+            @FormParam("holId") Integer id,
+            @FormParam("holName") String name,
+            @FormParam("holDate") String date) {
+        logger.debug("updateHoliday() is called, name: " + name + ", id: " + id + ", date: " + date);
+        //Instantiate dao
         GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
-        //check Holiday id
+        Holiday newHoliday = null;
+        //test that fields not empty
+        if (id.equals(null) || name.isEmpty() || date.isEmpty()) {
+            return Response.status(400)
+                    .entity("Form field was left blank - please fill out all fields completely")
+                    .build();
+        }
+        //Test that id is found
         if (holidayDao.getById(id) == null) {
-            String errorMessage = "Unable to find results for id: " + id;
-            return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
+            return Response.status(400)
+                    .entity("That id wasn't found.  Try again?")
+                    .build();
+        } else {
+            newHoliday = holidayDao.getById(id);
         }
-        //check values for name and date
-        if (name.isEmpty() || date.isEmpty()) {
-            String errorMessage = "Please enter a valid name and date!";
-            return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
+        try {
+            format = format.withLocale(Locale.US);
+
+            LocalDate localDate = LocalDate.parse(date);
+            Date dateNow = formatter.parse(date);
+            Instant instant = dateNow.toInstant();
+            //LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+            newHoliday.setName(name);
+            newHoliday.setDate(localDate);
+            holidayDao.update(newHoliday);
+        } catch (ParseException e) {
+            logger.error("Parse exception error when formatting Date");
         }
-        //String to LocalDate
-        LocalDate localDate = LocalDate.parse(date);
-        //update Holiday
-        Holiday holiday = new Holiday(localDate, name);
-        holidayDao.update(holiday);
-        String json = new Gson().toJson(holiday);
-        return Response.status(Response.Status.OK).entity(json).build();
+
+        Holiday updated = holidayDao.getById(id);
+
+        return Response.status(200)
+                .entity("updateHoliday() is called, Holiday: " + updated.toString())
+                .build();
+
     }
 }

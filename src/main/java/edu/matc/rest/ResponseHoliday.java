@@ -6,11 +6,10 @@ import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
 import java.util.List;
 
 @Path("/holidays")
@@ -97,4 +96,49 @@ public class ResponseHoliday {
         return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
     }
 
+    /**
+     * updates the holiday with a form POST
+     * @param id the holiday id (to change)
+     * @param name the name to change the holiday to
+     * @param date the date to change the holiday to
+     * @return the response
+     */
+    @POST
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public Response updateHoliday(
+            @FormParam("holId") Integer id,
+            @FormParam("holName") String name,
+            @FormParam("holDate") String date) {
+        logger.debug("updateHoliday() is called, name: " + name + ", id: " + id + ", date: " + date);
+        //Instantiate dao
+        GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
+        Holiday newHoliday = null;
+        //test that fields not empty
+        if (id.equals(null) || name.isEmpty() || date.isEmpty()) {
+            return Response.status(400)
+                    .entity("Form field was left blank - please fill out all fields completely")
+                    .build();
+        }
+        //Test that id is found
+        if (holidayDao.getById(id) == null) {
+            return Response.status(400)
+                    .entity("That id wasn't found.  Try again?")
+                    .build();
+        } else {
+            newHoliday = holidayDao.getById(id);
+        }
+        //Set attributes
+        LocalDate localDate = LocalDate.parse(date);
+        newHoliday.setName(name);
+        newHoliday.setDate(localDate);
+        holidayDao.update(newHoliday);
+        Holiday updated = holidayDao.getById(id);
+
+        return Response.status(200)
+                .entity("updateHoliday() is called, Holiday: " + updated.toString())
+                .build();
+
+    }
 }

@@ -5,7 +5,7 @@
 
 <p>
 <!-- TODO: low priority - not hard-coded? -->
-<form method="POST" action="http://localhost:8080/national_holidays_team_project_war/test/holidayUpdate" >
+<form method="POST" action="http://localhost:8080/national_holidays_team_project_war/services/holiday/update" >
     <label for="holId">Holiday ID:</label><br>
     <input type="text" id="holId" name="holId" required><br><br>
     <label for="holName">Holiday Name:</label><br>

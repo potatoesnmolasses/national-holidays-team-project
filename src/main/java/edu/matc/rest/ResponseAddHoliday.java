@@ -5,9 +5,8 @@ import edu.matc.persistence.GenericDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 
@@ -15,17 +14,13 @@ import java.time.LocalDate;
 public class ResponseAddHoliday {
     private final Logger logger = LogManager.getLogger(this.getClass());
     @POST
-    @Path("/{month}/{day}/{name}")
     public Response addHoliday(
-            @PathParam("month") String monthString,
-            @PathParam("day") String dayString,
-            @PathParam("name") String name) {
+            @QueryParam("month") int month,
+            @QueryParam("day") int day,
+            @QueryParam("name") String name) {
 
         try {
-            // Parse string to int
-            int month = Integer.parseInt(monthString);
-            int day = Integer.parseInt(dayString);
-            // Get current year
+
             int currentYear = LocalDate.now().getYear();
             LocalDate holidayDate = LocalDate.of(currentYear, month, day);
 

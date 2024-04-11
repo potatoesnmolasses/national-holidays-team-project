@@ -24,8 +24,6 @@ import java.util.Locale;
 @Path("/holiday")
 public class ResponseHolidayUpdate {
     private final Logger logger = LogManager.getLogger(this.getClass());
-    private static final SimpleDateFormat formatter = new SimpleDateFormat("MMM d");
-    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d");
 
     @POST
     @Path("/update")
@@ -53,20 +51,11 @@ public class ResponseHolidayUpdate {
         } else {
             newHoliday = holidayDao.getById(id);
         }
-        try {
-            format = format.withLocale(Locale.US);
-
-            LocalDate localDate = LocalDate.parse(date);
-            Date dateNow = formatter.parse(date);
-            Instant instant = dateNow.toInstant();
-            //LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-            newHoliday.setName(name);
-            newHoliday.setDate(localDate);
-            holidayDao.update(newHoliday);
-        } catch (ParseException e) {
-            logger.error("Parse exception error when formatting Date");
-        }
-
+        //Set attributes
+        LocalDate localDate = LocalDate.parse(date);
+        newHoliday.setName(name);
+        newHoliday.setDate(localDate);
+        holidayDao.update(newHoliday);
         Holiday updated = holidayDao.getById(id);
 
         return Response.status(200)

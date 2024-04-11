@@ -1,7 +1,10 @@
 package edu.matc.rest;
 
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +18,7 @@ public class RequestHoliday extends Application {
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add(ResponseHoliday.class);
+        h.add(ResponseHolidayUpdate.class);
         return h;
     }
 }

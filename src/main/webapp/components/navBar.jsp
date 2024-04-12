@@ -10,9 +10,6 @@
                 <a class="nav-link" href="index.jsp">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="viewAll.jsp">All Holidays</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="redocHoliday.jsp">Docs</a>
             </li>
             <li class="nav-item">

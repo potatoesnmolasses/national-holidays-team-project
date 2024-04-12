@@ -174,6 +174,7 @@ public class ResponseHoliday {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response addHoliday(
             @FormParam("month") int month,
             @FormParam("day") int day,

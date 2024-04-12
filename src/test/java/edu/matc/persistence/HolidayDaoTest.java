@@ -85,8 +85,8 @@ class HolidayDaoTest {
 
     @Test
     void getPropertyByTodaysDate() {
-        // This is the logic I used to get the daily holiday.
-        // It's not pretty, but it works.
+        // This takes the current date and formats it into a string like "01/01/2024"
+        // Then the month and day are taken from the substring of the date string and parsed into an int
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String today = formatter.format((new Date()));
         int month = Integer.parseInt(today.substring(0,2));

@@ -134,7 +134,7 @@ public class ResponseHoliday {
     @POST
     @Path("/update")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_HTML)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateHoliday(
             @FormParam("holId") Integer id,
             @FormParam("holName") String name,
@@ -164,8 +164,10 @@ public class ResponseHoliday {
         holidayDao.update(newHoliday);
         Holiday updated = holidayDao.getById(id);
 
+        String json = new Gson().toJson(updated);
+
         return Response.status(200)
-                .entity("updateHoliday() is called, Holiday: " + updated.toString())
+                .entity(json)
                 .build();
 
     }

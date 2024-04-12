@@ -79,9 +79,55 @@ paths:
                   message:
                     type: string
 
-  /holidaysByName/{name}:
+  /names/{name}:
     get:
       summary: Returns a JSON of the holiday when found by name
+      description:
+      responses:
+
+        '200':    # status code
+          description: A JSON file containing a holiday
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Holiday'
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /daily:
+    get:
+      summary: Returns a JSON of the holidays for today
+      description:
+      responses:
+
+        '200':    # status code
+          description: A JSON file containing holidays
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Holiday'
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /update:
+    post:
+      summary: Returns a JSON of the holiday when found by date
       description:
       responses:
 

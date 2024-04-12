@@ -1,5 +1,6 @@
 package edu.matc.entity;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
  * obtained from https://www.timeanddate.com/holidays/fun/ using jsoup web scraper
  */
 @Data
+@XmlRootElement
 @Entity
 @Table(name = "holiday")
 public class Holiday {

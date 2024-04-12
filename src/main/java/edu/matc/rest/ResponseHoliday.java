@@ -9,7 +9,9 @@ import org.apache.logging.log4j.Logger;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Path("/holidays")
@@ -77,6 +79,32 @@ public class ResponseHoliday {
     }
 
     /**
+     * Gets the current day's holidays
+     * @return the response with the results
+     */
+    @GET
+    @Path("daily")
+    @Produces("application/json")
+    public Response getDailyHolidays() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String today = formatter.format((new Date()));
+        int month = Integer.parseInt(today.substring(0,2));
+        int day = Integer.parseInt(today.substring(3,5));
+
+        GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
+        List<Holiday> holidays = holidayDao.findByMonthAndDay(month, day);
+
+        if(!holidays.isEmpty()) {
+            String json = new Gson().toJson(holidays);
+            return Response.status(Response.Status.OK).entity(json).build();
+        }
+
+        String errorMessage = "Unable to find results for today's date!";
+        return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
+    }
+
+    /**
      * Gets the holidays by a search term
      * @param name the search term
      * @return the response with the results
@@ -106,7 +134,7 @@ public class ResponseHoliday {
     @POST
     @Path("/update")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_HTML)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateHoliday(
             @FormParam("holId") Integer id,
             @FormParam("holName") String name,
@@ -136,8 +164,10 @@ public class ResponseHoliday {
         holidayDao.update(newHoliday);
         Holiday updated = holidayDao.getById(id);
 
+        String json = new Gson().toJson(updated);
+
         return Response.status(200)
-                .entity("updateHoliday() is called, Holiday: " + updated.toString())
+                .entity(json)
                 .build();
 
     }

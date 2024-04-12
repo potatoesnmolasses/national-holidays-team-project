@@ -9,7 +9,9 @@ import org.apache.logging.log4j.Logger;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Path("/holidays")
@@ -73,6 +75,32 @@ public class ResponseHoliday {
         }
 
         String errorMessage = "Unable to find results for date: " + month + "/" + day;
+        return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
+    }
+
+    /**
+     * Gets the current day's holidays
+     * @return the response with the results
+     */
+    @GET
+    @Path("daily")
+    @Produces("application/json")
+    public Response getDailyHolidays() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String today = formatter.format((new Date()));
+        int month = Integer.parseInt(today.substring(0,2));
+        int day = Integer.parseInt(today.substring(3,5));
+
+        GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
+        List<Holiday> holidays = holidayDao.findByMonthAndDay(month, day);
+
+        if(!holidays.isEmpty()) {
+            String json = new Gson().toJson(holidays);
+            return Response.status(Response.Status.OK).entity(json).build();
+        }
+
+        String errorMessage = "Unable to find results for today's date!";
         return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
     }
 
@@ -141,4 +169,50 @@ public class ResponseHoliday {
                 .build();
 
     }
+    @POST
+    @Path("/add")
+    @Produces("application/json")
+    public Response addHoliday(@QueryParam("month") String monthStr,
+                               @QueryParam("day") String dayStr,
+                               @QueryParam("name") String name) {
+        try {
+            // Parse month and day to integers
+            int month = Integer.parseInt(monthStr);
+            int day = Integer.parseInt(dayStr);
+
+            if (month < 1 || month > 12 || day < 1 || day > 31) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Invalid month or day")
+                        .build();
+            }
+
+            LocalDate holidayDate = LocalDate.of(LocalDate.now().getYear(), month, day);
+            Holiday newHoliday = new Holiday();
+            newHoliday.setName(name);
+            newHoliday.setDate(holidayDate);
+
+            GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
+            holidayDao.insertEntity(newHoliday);
+
+            // Check if the holiday was inserted successfully
+            if (newHoliday.getId() != 0) {
+                return Response.status(Response.Status.OK)
+                        .entity(newHoliday.toString())
+                        .build();
+            } else {
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity("Failed to add a new holiday.")
+                        .build();
+            }
+        } catch (NumberFormatException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Invalid month or day format")
+                    .build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Failed to add a new holiday. Error: " + e.getMessage())
+                    .build();
+        }
+    }
 }
+

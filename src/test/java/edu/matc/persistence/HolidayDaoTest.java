@@ -8,9 +8,12 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
+import static jakarta.xml.bind.DatatypeConverter.parseInteger;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HolidayDaoTest {
@@ -71,5 +74,29 @@ class HolidayDaoTest {
     void getByPropertyEqual() {
         List<Holiday> holidays = holidayDao.getByPropertyEqual("name", "Polar Bear Plunge Day");
         assertEquals(1, holidays.size());
+    }
+
+    @Test
+    void getPropertyByMonthAndDay() {
+        List<Holiday> holidays = holidayDao.findByMonthAndDay(1,2);
+        assertEquals(3, holidays.size());
+        assertEquals("Buffet Day", holidays.get(0).getName());
+    }
+
+    @Test
+    void getPropertyByTodaysDate() {
+        // This takes the current date and formats it into a string like "01/01/2024"
+        // Then the month and day are taken from the substring of the date string and parsed into an int
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String today = formatter.format((new Date()));
+        int month = Integer.parseInt(today.substring(0,2));
+        int day = Integer.parseInt(today.substring(3,5));
+        List<Holiday> holidays = holidayDao.findByMonthAndDay(month, day);
+
+        // Tests for 4/12
+        assertEquals(2, holidays.size());
+        assertEquals("Grilled Cheese Day", holidays.get(0).getName());
+
+
     }
 }

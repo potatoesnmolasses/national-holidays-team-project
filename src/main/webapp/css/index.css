@@ -1,0 +1,32 @@
+body {
+    background-color: #f0e9ff;
+}
+
+#welcome-message {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+#welcome-section {
+    text-align: center;
+    background-color: #6a1be1;
+    margin-top: 8%;
+    margin-bottom: 8%;
+}
+
+#tutorial-section {
+    background-color: #6a1be1;
+    margin-top: 8%;
+    margin-bottom: 8%;
+}
+
+#doc-button {
+    text-align: center;
+}
+
+#live-demo-section {
+    text-align: center;
+    background-color: #6a1be1;
+    margin-top: 8%;
+    margin-bottom: 8%;
+}

@@ -93,6 +93,7 @@ class HolidayDaoTest {
         int day = Integer.parseInt(today.substring(3,5));
         List<Holiday> holidays = holidayDao.findByMonthAndDay(month, day);
 
+        // Tests for 4/12
         assertEquals(2, holidays.size());
         assertEquals("Grilled Cheese Day", holidays.get(0).getName());
 

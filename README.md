@@ -18,9 +18,7 @@ This API is intended to tackle that exact issue. It can be used to view, update,
 ### Project Technologies/Techniques
 
 * API Documentation
-    * [Redockly](https://redocly.com/)      
-* Security/Authentication
-    * AWS Cognito
+    * [Redockly](https://redocly.com/)
 * Database
     * MySQL 8.0.22
 * ORM Framework
@@ -32,8 +30,6 @@ This API is intended to tackle that exact issue. It can be used to view, update,
     * Inspired by: [The Trivia API](https://the-trivia-api.com/docs/v2/)
 * Logging
     * Log4J2
-* Hosting
-    * AWS
 * Unit Testing
     * JUnit 5
 * IDE: IntelliJ IDEA

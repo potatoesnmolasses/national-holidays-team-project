@@ -127,28 +127,34 @@ paths:
 
   /update:
     post:
-      summary: Returns a JSON of the updated holiday
+      summary: Returns a string of the updated holiday
       description:
       operationId: updateHoliday
       parameters:
         - name: id
-          in: path
+          in: query
           description: ID of holiday to be updated
           required: true
           schema:
             type: integer
         - name: name
-          in: path
+          in: query
           description: new name of holiday
           required: true
           schema:
             type: string
-        - name: date
-          in: path
-          description: new date of holiday
+        - name: month
+          in: query
+          description: month of holiday to be added
           required: true
           schema:
-            type: string
+            type: integer
+        - name: day
+          in: query
+          description: day of holiday to be added
+          required: true
+          schema:
+            type: integer
       responses:
 
         '400':
@@ -163,7 +169,7 @@ paths:
 
   /add:
     post:
-      summary: Returns a JSON of the new holiday
+      summary: Returns a string of the new holiday
       description:
       operationId: addHoliday
       parameters:

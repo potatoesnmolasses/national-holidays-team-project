@@ -1,7 +1,7 @@
 <div id="header">
 
     <div id="logo">
-        <p>Holiday Wizard Logo Here :)</p>
+        <p>holiday wizard :)</p>
     </div>
 
     <div id="navigation-list" class="d-flex justify-content-center py-3" class="sticky-top">

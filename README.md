@@ -5,6 +5,8 @@ In the United States there are 11 designated federal holidays, as well as a siza
 
 This API is intended to tackle that exact issue. It can be used to view, update, and delete existing holidays, and to create new ones. Whether you want to keep track of the upcoming days in general or make sure you're never caught out with facial hair on National No Beard Day (October 18), the Holiday Wizard can help!
 
+Use GET methods to search the database of over 400 holidays by name or date, get holidays happening right now, or use POST methods to update an existing holiday or add a new one!
+
 ---
 
 ### Team Members

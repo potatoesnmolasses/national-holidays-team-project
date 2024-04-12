@@ -161,11 +161,10 @@ public class ResponseHoliday {
             newHoliday = holidayDao.getById(id);
         }
 
-        //Set attributes
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d");
         // Get the current year
         int currentYear = LocalDate.now().getYear();
         LocalDate localDate = LocalDate.of(currentYear, month, day);
+        //set attributes
         newHoliday.setName(name);
         newHoliday.setDate(localDate);
         holidayDao.update(newHoliday);

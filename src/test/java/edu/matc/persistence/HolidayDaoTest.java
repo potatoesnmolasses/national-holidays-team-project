@@ -72,4 +72,11 @@ class HolidayDaoTest {
         List<Holiday> holidays = holidayDao.getByPropertyEqual("name", "Polar Bear Plunge Day");
         assertEquals(1, holidays.size());
     }
+
+    @Test
+    void getPropertyByMonthAndDay() {
+        List<Holiday> holidays = holidayDao.findByMonthAndDay(1,2);
+        assertEquals(3, holidays.size());
+        assertEquals("Buffet Day", holidays.get(0).getName());
+    }
 }

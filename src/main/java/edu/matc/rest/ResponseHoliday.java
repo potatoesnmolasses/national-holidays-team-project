@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Path("/holidays")
@@ -75,6 +76,29 @@ public class ResponseHoliday {
         String errorMessage = "Unable to find results for date: " + month + "/" + day;
         return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
     }
+
+    /**
+     * Gets the current day's holidays
+     * @return the response with the results
+     */
+//    @GET
+//    @Path("daily")
+//    @Produces("application/json")
+//    public Response getDailyHolidays() {
+//
+//        Date currentDate = new Date();
+//
+//        GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
+//        List<Holiday> holidays = holidayDao.findByMonthAndDay(/*Convert date first*/);
+//
+//        if(!holidays.isEmpty()) {
+//            String json = new Gson().toJson(holidays);
+//            return Response.status(Response.Status.OK).entity(json).build();
+//        }
+//
+//        String errorMessage = "Unable to find results for today's date!";
+//        return Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
+//    }
 
     /**
      * Gets the holidays by a search term

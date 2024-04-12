@@ -9,7 +9,7 @@ servers:
   - url: http://localhost:8080
     description: internal staging server for testing
 paths:
-  /allHolidays:
+  /services/holidays/all:
     get:
       summary: Returns a JSON list of holidays.
       description: Optional extended description in CommonMark or HTML.
@@ -33,7 +33,7 @@ paths:
                   message:
                     type: string
 
-  /holidaysById/{id}:
+  /id/{id}:
     get:
       summary: Returns a JSON of the holiday when found by unique id
       description:
@@ -56,7 +56,7 @@ paths:
                   message:
                     type: string
 
-  /holidaysByDate/{month}/{day}:
+  /dates/{month}/{day}:
     get:
       summary: Returns a JSON of the holiday when found by date
       description:

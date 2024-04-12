@@ -1,12 +1,12 @@
 # Team Time Log
 
 ## Jordan's Log
-| Week     | Hours | Work Completed |
-| :--:     | :--:  |     :---:      |
-| Week 9   |       |                |
-| Week 10  |       |                |
-| Week 11  |       |                |
-| Week 12  |       |                |
+| Week     | Hours |             Work Completed              |
+| :--:     |:-----:|:---------------------------------------:|
+| Week 9   |   2   |     Problem statement and research      |
+| Week 10  |   4   | Data scraping and creating the database |
+| Week 11  |   4   |   Hibernate setup  / update / redocly   |
+| Week 12  |       |                                         |
 
 ## Anna's Log
 | Week     | Hours |                                          Work Completed                                          |

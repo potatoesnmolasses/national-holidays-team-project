@@ -9,7 +9,7 @@ servers:
   - url: http://localhost:8080
     description: internal staging server for testing
 paths:
-  /allHolidays:
+  /services/holidays/all:
     get:
       summary: Returns a JSON list of holidays.
       description: Optional extended description in CommonMark or HTML.
@@ -33,7 +33,7 @@ paths:
                   message:
                     type: string
 
-  /holidaysById/{id}:
+  /id/{id}:
     get:
       summary: Returns a JSON of the holiday when found by unique id
       description:
@@ -56,7 +56,7 @@ paths:
                   message:
                     type: string
 
-  /holidaysByDate/{month}/{day}:
+  /dates/{month}/{day}:
     get:
       summary: Returns a JSON of the holiday when found by date
       description:
@@ -79,7 +79,7 @@ paths:
                   message:
                     type: string
 
-  /holidaysByName/{name}:
+  /names/{name}:
     get:
       summary: Returns a JSON of the holiday when found by name
       description:
@@ -101,6 +101,108 @@ paths:
                 properties:
                   message:
                     type: string
+
+  /daily:
+    get:
+      summary: Returns a JSON of the holidays for today
+      description:
+      responses:
+
+        '200':    # status code
+          description: A JSON file containing holidays
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Holiday'
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /update:
+    post:
+      summary: Returns a string of the updated holiday
+      description:
+      operationId: updateHoliday
+      parameters:
+        - name: id
+          in: query
+          description: ID of holiday to be updated
+          required: true
+          schema:
+            type: integer
+        - name: name
+          in: query
+          description: new name of holiday
+          required: true
+          schema:
+            type: string
+        - name: month
+          in: query
+          description: month of holiday to be added
+          required: true
+          schema:
+            type: integer
+        - name: day
+          in: query
+          description: day of holiday to be added
+          required: true
+          schema:
+            type: integer
+      responses:
+
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /add:
+    post:
+      summary: Returns a string of the new holiday
+      description:
+      operationId: addHoliday
+      parameters:
+        - name: month
+          in: query
+          description: month of holiday to be added
+          required: true
+          schema:
+            type: integer
+        - name: day
+          in: query
+          description: day of holiday to be added
+          required: true
+          schema:
+            type: integer
+        - name: name
+          in: query
+          description: name of holiday to be added
+          required: true
+          schema:
+            type: string
+      responses:
+
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
 
 components:
   schemas:

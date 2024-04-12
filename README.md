@@ -5,6 +5,8 @@ In the United States there are 11 designated federal holidays, as well as a siza
 
 This API is intended to tackle that exact issue. It can be used to view, update, and delete existing holidays, and to create new ones. Whether you want to keep track of the upcoming days in general or make sure you're never caught out with facial hair on National No Beard Day (October 18), the Holiday Wizard can help!
 
+Use GET methods to search the database of over 400 holidays by name or date, get holidays happening right now, or use POST methods to update an existing holiday or add a new one!
+
 ---
 
 ### Team Members
@@ -18,9 +20,7 @@ This API is intended to tackle that exact issue. It can be used to view, update,
 ### Project Technologies/Techniques
 
 * API Documentation
-    * [Redockly](https://redocly.com/)      
-* Security/Authentication
-    * AWS Cognito
+    * [Redockly](https://redocly.com/)
 * Database
     * MySQL 8.0.22
 * ORM Framework
@@ -32,8 +32,6 @@ This API is intended to tackle that exact issue. It can be used to view, update,
     * Inspired by: [The Trivia API](https://the-trivia-api.com/docs/v2/)
 * Logging
     * Log4J2
-* Hosting
-    * AWS
 * Unit Testing
     * JUnit 5
 * IDE: IntelliJ IDEA

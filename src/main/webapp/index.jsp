@@ -7,23 +7,39 @@
     <body>
     <c:import url="components/navBar.jsp"/>
 
-    <div id="welcome-section">
-        <h1 id="welcome-message">Welcome to Holiday Wizard!</h1>
-        <p>From Squirrel Appreciation Day, to International Coffee Day, every day has something special going on.</p>
-        <p>ALL COLORS WILL BE CHANGED. THIS IS JUST FOR ME TO SEE WHERE THINGS GO</p>
+    <h1 id="welcome-message">Welcome to Holiday Wizard!</h1>
+
+    <div id="welcome-section" class="container">
+        <div class="card">
+            <div class="card-body">
+                <p>From Squirrel Appreciation Day, to Internation Coffee Day, every day has something special going on. Add more later</p>
+            </div>
+        </div>
     </div>
 
-    <div id="tutorial-section">
-        <h1 id="getting-started">Getting Started</h1>
-        <p>Here's where I would put the tutorial text.</p>
+    <div id="tutorial-section" class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Getting Started</h2>
+            </div>
+            <div class="card-body">
+                Here's where I would put the tutorial text.
+            </div>
+        </div>
     </div>
 
-    <div id="live-demo-section">
-        <h1>Give it a shot!</h1>
-        <!--ADD THE ACTION LATER WHEN WE HAVE A REQUEST LINK -->
-        <form method="GET" action="">
-            <input type="submit" value="Send request">
-        </form>
+    <div id="live-demo-section" class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Give it a shot!</h2>
+            </div>
+            <div class="card-body">
+                <!-- ADD THE ACTION LATER WHEN WE HAVE A WORKING URL -->
+                <form method="GET" action="http://localhost:8080/national_holidays_team_project_war/services/holidays/all">
+                    <input type="submit" value="Send GET request">
+                </form>
+            </div>
+        </div>
     </div>
 
     <c:import url="components/bootstrapBody.jsp"/>

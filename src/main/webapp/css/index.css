@@ -1,4 +1,26 @@
-#welcome-section * {
-    margin: 0 auto;
+#welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#welcome-section {
+    text-align: center;
     background-color: cornflowerblue;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+#tutorial-section {
+    text-align: center;
+    background-color: lightgreen;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+#live-demo-section {
+    text-align: center;
+    background-color: orange;
+    margin-top: 15%;
+    margin-bottom: 15%;
 }

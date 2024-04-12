@@ -54,7 +54,7 @@ class HolidayDaoTest {
         LocalDate holidayDate = LocalDate.of(1970, 4, 15);
         Holiday holidayToInsert = new Holiday(holidayDate,"Your mom");
         int insertedUserId = holidayDao.insertEntity(holidayToInsert);
-        assertNotEquals(0, holidayToInsert);
+        assertNotEquals(0, insertedUserId);
     }
 
     @Test

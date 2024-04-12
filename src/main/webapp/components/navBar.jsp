@@ -15,6 +15,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="redocHoliday.jsp">Docs</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="updateForm.jsp">Update Data</a>
+            </li>
         </ul>
     </div>
 </div>

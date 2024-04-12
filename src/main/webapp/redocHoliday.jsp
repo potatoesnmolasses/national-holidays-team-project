@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-<c:import url="components/header.jsp"/>
+<c:import url="components/navBar.jsp"/>
 <redoc spec-url='openapi.yaml'></redoc>
 <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"> </script>
 <c:import url="components/bootstrapBody.jsp"/>

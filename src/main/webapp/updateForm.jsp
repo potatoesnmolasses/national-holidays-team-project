@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
+<c:set var = "title" scope = "page" value="Update Form"/>
+<c:import url="components/head.jsp"/>
 <body>
+<c:import url="components/navBar.jsp"/>
 <h2>Update Function</h2>
 
 <p>
@@ -15,6 +18,6 @@
     <button type="submit" name="submit" value="search">Update</button>
 </form></p>
 
-
+<c:import url="components/bootstrapBody.jsp"/>
 </body>
 </html>

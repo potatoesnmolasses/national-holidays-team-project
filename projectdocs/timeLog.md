@@ -19,7 +19,7 @@
 ## Ian's Log
 | Week     | Hours | Work Completed |
 | :--:     | :--:  |     :---:      |
-| Week 9   |       |                |
-| Week 10  |       |                |
-| Week 11  |       |                |
-| Week 12  |       |                |
+| Week 9   |   1   |   Team meeting (Every week)            |
+| Week 10  |   2    |    Research design of similiar APIs            |
+| Week 11  |   4    |     Create web page bases. Worked on viewAll and bugfixing           |
+| Week 12  |   6    |      Wrestle bootstrap. Added daily holiday.          |

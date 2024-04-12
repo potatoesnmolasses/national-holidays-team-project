@@ -1,7 +1,7 @@
 <div id="header">
 
     <div id="logo">
-        <p>Holiday Wizard Logo Here</p>
+        <p>Holiday Wizard Logo Here :)</p>
     </div>
 
     <div id="navigation-list" class="d-flex justify-content-center py-3" class="sticky-top">
@@ -11,9 +11,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="redocHoliday.jsp">Docs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="updateForm.jsp">Update Data</a>
             </li>
         </ul>
     </div>

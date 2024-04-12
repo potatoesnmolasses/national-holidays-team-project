@@ -6,3 +6,8 @@
     width: 100%;
     z-index: 3;
 }
+
+.nav-item {
+    background-color: white;
+    color: black;
+}

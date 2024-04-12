@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -128,23 +129,25 @@ public class ResponseHoliday {
      * updates the holiday with a form POST
      * @param id the holiday id (to change)
      * @param name the name to change the holiday to
-     * @param date the date to change the holiday to
+     * @param month the month to change the holiday to
+     * @param day the day to change the holiday to
      * @return the response
      */
     @POST
     @Path("/update")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("text/plain")
     public Response updateHoliday(
             @FormParam("holId") Integer id,
             @FormParam("holName") String name,
-            @FormParam("holDate") String date) {
-        logger.debug("updateHoliday() is called, name: " + name + ", id: " + id + ", date: " + date);
+            @FormParam("day") Integer day,
+            @FormParam("month") Integer month) {
         //Instantiate dao
         GenericDao<Holiday> holidayDao = new GenericDao<>(Holiday.class);
         Holiday newHoliday = null;
+
         //test that fields not empty
-        if (id.equals(null) || name.isEmpty() || date.isEmpty()) {
+        if (id.equals(null) || name.isEmpty() || month.equals(null) || day.equals(null)) {
             return Response.status(400)
                     .entity("Form field was left blank - please fill out all fields completely")
                     .build();
@@ -157,17 +160,23 @@ public class ResponseHoliday {
         } else {
             newHoliday = holidayDao.getById(id);
         }
+
         //Set attributes
-        LocalDate localDate = LocalDate.parse(date);
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d");
+        // Get the current year
+        int currentYear = LocalDate.now().getYear();
+        LocalDate localDate = LocalDate.of(currentYear, month, day);
         newHoliday.setName(name);
         newHoliday.setDate(localDate);
         holidayDao.update(newHoliday);
         Holiday updated = holidayDao.getById(id);
+        logger.debug("Holiday to add: " + newHoliday.toString() + ", month: " + month + ", day: " + day);
+        logger.debug("Holiday added: " + updated.toString());
 
-        String json = new Gson().toJson(updated);
+        String output = "Holiday added! New Holiday: " + updated.toString();
 
         return Response.status(200)
-                .entity(json)
+                .entity(output)
                 .build();
 
     }

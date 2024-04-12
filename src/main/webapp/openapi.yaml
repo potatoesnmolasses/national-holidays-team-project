@@ -127,16 +127,29 @@ paths:
 
   /update:
     post:
-      summary: Returns a JSON of the holiday when found by date
+      summary: Returns a JSON of the updated holiday
       description:
+      operationId: update
+      parameters:
+        - id: id
+          in: path
+          description: ID of holiday to be updated
+          required: true
+          schema:
+            type: integer
+        - name: name
+          in: query
+          description: new name of holiday
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: query
+          description: new date of holiday
+          required: true
+          schema:
+            type: string
       responses:
-
-        '200':    # status code
-          description: A JSON file containing a holiday
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Holiday'
 
         '400':
           description: Invalid request
